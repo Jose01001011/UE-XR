@@ -166,7 +166,7 @@ Through these projects, the team gained practical experience in:
 
 # Team
 
-Developed as part of the Extended Reality (XR) module at the Namibia University of Science and Technology (NUST).
+Developed as part of the Extended Reality (XR) and User Experience (UEP) modules at the Namibia University of Science and Technology (NUST).
 
 ### Contributors
 
