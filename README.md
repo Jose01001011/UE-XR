@@ -6,7 +6,7 @@ The projects explore immersive interaction, virtual environments, animation syst
 
 ---
 
-# Project 1: Ostrich Egg Heist
+# Project 1: Ostrich Egg Hunt
 
 ## Overview
 
