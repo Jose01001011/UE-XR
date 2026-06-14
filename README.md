@@ -10,7 +10,7 @@ The projects explore immersive interaction, virtual environments, animation syst
 
 ## Overview
 
-**Ostrich Egg Heist** is an asymmetric Virtual Reality experience set in an African savanna environment. The project explores communication, stealth mechanics, environmental storytelling, and information asymmetry within a VR setting.
+**Ostrich Egg Hunt** is an asymmetric Virtual Reality experience set in an African savanna environment. The project explores communication, stealth mechanics, environmental storytelling, and information asymmetry within a VR setting.
 
 The experience revolves around a thief attempting to steal ostrich eggs while avoiding detection. Different participants possess different information, requiring communication, coordination, and decision-making to successfully complete the objective.
 
@@ -105,7 +105,7 @@ Both projects followed a similar XR development pipeline:
 
 # Screenshots
 
-## Ostrich Egg Heist
+## Ostrich Egg Hunt
 
 | Screenshot | Description |
 |------------|-------------|
@@ -146,7 +146,7 @@ Through these projects, the team gained practical experience in:
 
 # Future Work
 
-## Ostrich Egg Heist
+## Ostrich Egg Hunt
 
 - Multiplayer implementation
 - Expanded AI behaviours
