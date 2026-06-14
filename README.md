@@ -1,6 +1,6 @@
 # Extended Reality (XR) and User Experience (UEP) Projects Portfolio
 
-This repository contains two Virtual Reality (VR) projects developed as part of the **Extended Reality (XR)** module at the **Namibia University of Science and Technology (NUST)**.
+This repository contains two Virtual Reality (VR) projects developed as part of the **Extended Reality (XR) and User Experience (UEP)** module at the **Namibia University of Science and Technology (NUST)**.
 
 The projects explore immersive interaction, virtual environments, animation systems, and user experience design using modern VR development tools and workflows.
 
