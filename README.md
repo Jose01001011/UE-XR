@@ -174,7 +174,6 @@ Developed as part of the Extended Reality (XR) module at the Namibia University 
 - Jose Clayton
 - Israel Shingenge
 - Kristofina Shipalanga
-- Tuilika
 
 ---
 
