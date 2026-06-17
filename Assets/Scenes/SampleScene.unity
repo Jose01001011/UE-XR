@@ -4925,8 +4925,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thief: {fileID: 2113681802}
+  thiefHit: {fileID: 2113681803}
   winScreen: {fileID: 0}
-  loseScreen: {fileID: 0}
+  loseScreen: {fileID: 2102023295}
   hudCanvas: {fileID: 0}
   OnGameWon:
     m_PersistentCalls:
@@ -13590,7 +13591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffdc71c105bd604fa0d576abcae4266, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.17
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffdc71c105bd604fa0d576abcae4266, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13598,7 +13599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffdc71c105bd604fa0d576abcae4266, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.82
+      value: -29.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ffdc71c105bd604fa0d576abcae4266, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19314,10 +19315,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thiefTarget: {fileID: 2113681801}
-  chaseRange: 7
+  nest: {fileID: 437933120}
+  detectRange: 14
   patrolSpeed: 1.4
   chaseSpeed: 3.5
-  patrolRadius: 9
+  patrolRadiusMin: 2.5
+  patrolRadiusMax: 12
   waitMin: 1.5
   waitMax: 4
 --- !u!114 &1198721200
@@ -19336,6 +19339,7 @@ MonoBehaviour:
   thiefHit: {fileID: 2113681803}
   attackRange: 2
   attackInterval: 1
+  windUpTime: 0.7
   ostrichAnimator: {fileID: 0}
   attackTrigger: Attack
 --- !u!114 &1198721201
@@ -19372,10 +19376,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3
-  m_Acceleration: 8
+  m_Acceleration: 14
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1.8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -29072,7 +29076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e9e0b1344c59dec4ea6b02e728f59596, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.099999
+      value: 8.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e9e0b1344c59dec4ea6b02e728f59596, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29080,7 +29084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e9e0b1344c59dec4ea6b02e728f59596, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40.47
+      value: -39.23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e9e0b1344c59dec4ea6b02e728f59596, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30669,6 +30673,7 @@ MonoBehaviour:
   colorStop: {r: 1, g: 0.85, b: 0, a: 1}
   colorHit: {r: 0.95, g: 0.1, b: 0.1, a: 1}
   hitFlashDuration: 0.5
+  flashRate: 6
 --- !u!23 &2006537655
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -32235,12 +32240,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eggObjective: {fileID: 437933120}
   reachDistance: 0.5
-  walkSpeed: 2
+  moveSpeed: 1.2
   normalDetectionChance: 1
   hiddenDetectionChance: 0.05
   OnEggReached:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 326650481}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: HandleEggReached
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDetected:
     m_PersistentCalls:
       m_Calls: []
@@ -32265,7 +32282,19 @@ MonoBehaviour:
       m_Calls: []
   OnGameOver:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 326650481}
+        m_TargetAssemblyTypeName: GestureThiefSystem.GameManager, Assembly-CSharp
+        m_MethodName: HandleThiefDetected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!195 &2113681804
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -32276,11 +32305,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 1.2
+  m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

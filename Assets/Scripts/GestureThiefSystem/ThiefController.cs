@@ -27,10 +27,20 @@ namespace GestureThiefSystem
         public UnityEngine.Events.UnityEvent OnEggReached;
         public UnityEngine.Events.UnityEvent OnDetected;
 
-        private NavMeshAgent _agent;
-        private Animator     _animator;
+        private NavMeshAgent _agentCache;
+        private Animator     _animatorCache;
         private ThiefState   _currentState = ThiefState.Idle;
         private bool         _reachedEgg;
+
+        // Lazy accessors — robust even if Awake was skipped (e.g. after a domain reload).
+        private NavMeshAgent _agent
+        {
+            get { if (_agentCache == null) _agentCache = GetComponent<NavMeshAgent>(); return _agentCache; }
+        }
+        private Animator _animator
+        {
+            get { if (_animatorCache == null) _animatorCache = GetComponent<Animator>(); return _animatorCache; }
+        }
 
         public ThiefState CurrentState => _currentState;
         public bool ReachedEgg => _reachedEgg;
@@ -40,10 +50,8 @@ namespace GestureThiefSystem
 
         private void Awake()
         {
-            _agent    = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
             // Force the agent speed to match our slow move speed (fixes prior mismatch).
-            _agent.speed = moveSpeed;
+            if (_agent != null) _agent.speed = moveSpeed;
         }
 
         private void OnEnable()  { GestureEventBus.OnGesturePerformed += HandleGesture; }
