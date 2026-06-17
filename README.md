@@ -174,7 +174,7 @@ Developed as part of the Extended Reality (XR) and User Experience (UEP) modules
 - Jose Clayton
 - Israel Shingenge
 - Kristofina Shipalanga
-
+  
 ---
 
 # License
