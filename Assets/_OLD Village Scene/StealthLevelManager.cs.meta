@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b0d6f43e91db9b1479cc5386279f7681
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - thiefIntroModel: {fileID: 919132149155446097, guid: 1d12e343d978af145a71253d9a99bc23, type: 3}
+  - signallerIntroModel: {fileID: 919132149155446097, guid: a07a82bb4ce0cda4a86e9043f73a6f2a, type: 3}
+  - thiefGameplayModel: {fileID: 919132149155446097, guid: 41bd4caf85ce68a40b8e6c1f2a3c6326, type: 3}
+  - signallerGameplayModel: {fileID: 919132149155446097, guid: 9cba5ec3221e3f641be71e135d30077a, type: 3}
+  - blackoutImage: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
