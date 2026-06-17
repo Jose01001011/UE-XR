@@ -27598,6 +27598,7 @@ GameObject:
   - component: {fileID: 1766144890}
   - component: {fileID: 1766144891}
   - component: {fileID: 1766144892}
+  - component: {fileID: 1766144893}
   m_Layer: 0
   m_Name: XR Origin (VR)
   m_TagString: Untagged
@@ -27637,12 +27638,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766144889}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af9fb3187b798f74d9d43631845c4d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   keyboardFallback: {fileID: 0}
+--- !u!114 &1766144893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766144889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ec3fb601fa0094a80fa0103480f86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useRightHand: 1
+  holdTime: 0.4
+  extendedThreshold: 0.09
+  curledThreshold: 0.06
+  logDebug: 0
 --- !u!4 &1774272152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ffdc71c105bd604fa0d576abcae4266, type: 3}
