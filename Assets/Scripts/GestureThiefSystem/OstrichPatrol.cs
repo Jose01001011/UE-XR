@@ -148,7 +148,9 @@ namespace GestureThiefSystem
         private void SetAnimMoving(bool moving)
         {
             if (_anim == null) return;
-            _anim.SetBool("isMoving", moving);
+            foreach (var p in _anim.parameters)
+                if (p.name == "isMoving" && p.type == AnimatorControllerParameterType.Bool)
+                { _anim.SetBool("isMoving", moving); return; }
         }
 
         public void SetThiefTarget(Transform t)

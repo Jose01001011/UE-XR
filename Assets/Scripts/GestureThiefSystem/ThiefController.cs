@@ -3,6 +3,7 @@
 // NavMesh-guarded. Move speed is deliberately SLOW so the player has time
 // to react and the ostrich (faster when chasing) can create real danger.
 
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -109,11 +110,21 @@ namespace GestureThiefSystem
         private void UpdateAnimator(ThiefState state)
         {
             if (_animator == null) return;
-            _animator.SetBool("isMoving",  state == ThiefState.Moving);
-            _animator.SetBool("isHidden",  state == ThiefState.Hidden);
-            _animator.SetBool("isAlert",   state == ThiefState.Alert);
-            _animator.SetBool("isRunning", false);
-            _animator.SetBool("isCrouching", false);
+            SafeBool("isMoving",  state == ThiefState.Moving);
+            SafeBool("isHidden",  state == ThiefState.Hidden);
+            SafeBool("isAlert",   state == ThiefState.Alert);
+            SafeBool("isRunning", false);
+            SafeBool("isCrouching", false);
+            // Also drive the legacy ThiefAnimator controller params if present,
+            // so the existing crawl/idle clips still play with movement.
+            SafeBool("IsSpottedOrPausing", state == ThiefState.Hidden || state == ThiefState.Alert);
+        }
+
+        private void SafeBool(string param, bool value)
+        {
+            foreach (var p in _animator.parameters)
+                if (p.name == param && p.type == AnimatorControllerParameterType.Bool)
+                { _animator.SetBool(param, value); return; }
         }
 
         private void CheckEggReached()

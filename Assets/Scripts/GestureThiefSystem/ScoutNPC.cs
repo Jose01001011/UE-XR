@@ -80,8 +80,11 @@ namespace GestureThiefSystem
         // -- Internal --
         private void PlayAnimationTrigger(string triggerName)
         {
-            if (scoutAnimator != null)
-                scoutAnimator.SetTrigger(triggerName);
+            if (scoutAnimator == null || string.IsNullOrEmpty(triggerName)) return;
+            // Guard: only fire if the controller actually has this parameter.
+            foreach (var p in scoutAnimator.parameters)
+                if (p.name == triggerName) { scoutAnimator.SetTrigger(triggerName); return; }
+            // Parameter missing -> silently skip (no console spam).
         }
 
         private void ShowGestureHint(PlayerGesture gesture)
