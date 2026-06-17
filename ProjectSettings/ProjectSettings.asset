@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Ostrich Pr
+  companyName: XR_Ostrich_Egg_Hunt
+  productName: Ostrich Egg Hunt XR
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -146,8 +146,6 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   - {fileID: 11400000, guid: 6b71fc3308b6a104ba99c9e4582e184b, type: 2}
-  - {fileID: 564675909163353854, guid: 048412db2d465c34bad71dc2030ee891, type: 2}
-  - {fileID: 2803513966979883493, guid: 184af21a124a83a42b567b3a9d7c7ff9, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -169,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.UnityTechnologies.com.unity.template.urpblank
+    Android: com.unam.xr.ostrichegghunt
     Standalone: com.Unity-Technologies.com.unity.template.urp-blank
     iPhone: com.Unity-Technologies.com.unity.template.urp-blank
   buildNumber:
@@ -861,8 +859,8 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Ostrich Pr
-  metroPackageVersion: 
+  metroPackageName: OstrichPr
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -870,7 +868,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Ostrich Pr
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Ostrich Pr
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

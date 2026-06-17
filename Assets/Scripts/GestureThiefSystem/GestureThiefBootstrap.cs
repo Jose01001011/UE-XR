@@ -58,12 +58,10 @@ namespace GestureThiefSystem
         // ----------------------------------------------------------------
         private void Awake()
         {
-            AutoResolve();
-            WireAll();
-            FixThief();
-            EnsurePlayerLocomotion();
-
-            Debug.Log("[Bootstrap] Done. Press Play — use H/S/G/C/R keys to test gestures.");
+            // NEUTERED: this bootstrap previously repositioned the player and added a
+            // broken locomotion provider on Awake (even when disabled via inspector,
+            // an accidental Undo could re-enable it). It now does nothing. The scene
+            // is wired directly and SimpleRigLocomotion handles movement.
         }
 
         // ----------------------------------------------------------------

@@ -38,16 +38,30 @@ namespace GestureThiefSystem
         private bool _triggered;
         private bool _gameplayActive;
 
+        [Header("Mode")]
+        [Tooltip("If false, skip the walking intro and start directly in gameplay.")]
+        [SerializeField] private bool playIntro = false;
+
         private void Start()
         {
-            // Put the player in the intro area, looking toward the intro characters.
+            if (!playIntro)
+            {
+                // Intro disabled: start directly in gameplay.
+                // IMPORTANT: do NOT move the player — they start exactly where the
+                // XR Origin is placed in the editor.
+                SetActiveAll(introObjects, false);   // hide intro characters
+                SetGameplayEnabled(true);            // gameplay active immediately
+                _triggered = true;
+                _gameplayActive = true;
+                return;
+            }
+
+            // --- Intro enabled path ---
             if (playerRig != null)
             {
                 playerRig.position = introSpawn;
-                playerRig.rotation = Quaternion.identity; // facing +Z
+                playerRig.rotation = Quaternion.identity;
             }
-
-            // Show intro characters, hold gameplay actors disabled until transition.
             SetActiveAll(introObjects, true);
             SetGameplayEnabled(false);
         }
