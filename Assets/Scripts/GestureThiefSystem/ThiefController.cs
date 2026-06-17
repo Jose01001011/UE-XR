@@ -1,6 +1,7 @@
 // ThiefController.cs
-// Core NPC controller for the Thief. Listens to GestureEventBus (GO / STOP only).
-// Guards all NavMeshAgent calls with isOnNavMesh checks.
+// Thief NPC: responds to GO (move to egg) and STOP (stop + hide) only.
+// NavMesh-guarded. Move speed is deliberately SLOW so the player has time
+// to react and the ostrich (faster when chasing) can create real danger.
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,8 +14,10 @@ namespace GestureThiefSystem
     {
         [Header("Navigation")]
         [SerializeField] private Transform eggObjective;
-        [SerializeField] private float reachDistance = 0.8f;
-        [SerializeField] private float walkSpeed     = 1.5f;
+        [SerializeField] private float reachDistance = 1.0f;
+
+        [Tooltip("Deliberately slow — gives the player reaction time and lets the ostrich catch up.")]
+        [SerializeField] private float moveSpeed = 1.2f;
 
         [Header("Detection Chances (0-1)")]
         [SerializeField] private float normalDetectionChance = 1.0f;
@@ -27,8 +30,10 @@ namespace GestureThiefSystem
         private NavMeshAgent _agent;
         private Animator     _animator;
         private ThiefState   _currentState = ThiefState.Idle;
+        private bool         _reachedEgg;
 
         public ThiefState CurrentState => _currentState;
+        public bool ReachedEgg => _reachedEgg;
 
         public float DetectionChance =>
             _currentState == ThiefState.Hidden ? hiddenDetectionChance : normalDetectionChance;
@@ -37,6 +42,8 @@ namespace GestureThiefSystem
         {
             _agent    = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
+            // Force the agent speed to match our slow move speed (fixes prior mismatch).
+            _agent.speed = moveSpeed;
         }
 
         private void OnEnable()  { GestureEventBus.OnGesturePerformed += HandleGesture; }
@@ -44,18 +51,19 @@ namespace GestureThiefSystem
 
         private void Update() { if (_agent.isOnNavMesh) CheckEggReached(); }
 
-        // GO gesture
+        // GO gesture -> move to egg (slowly)
         public void Move()
         {
+            if (_reachedEgg) return;
             SetState(ThiefState.Moving);
             if (!_agent.isOnNavMesh) return;
             _agent.isStopped = false;
-            _agent.speed     = walkSpeed;
+            _agent.speed     = moveSpeed;
             if (eggObjective != null) _agent.SetDestination(eggObjective.position);
-            Debug.Log("[Thief] GO — moving to egg.");
+            Debug.Log("[Thief] GO — moving to egg (slow).");
         }
 
-        // STOP gesture — thief stops and hides
+        // STOP gesture -> stop and hide (ostrich loses target)
         public void Stop()
         {
             SetState(ThiefState.Hidden);
@@ -79,7 +87,7 @@ namespace GestureThiefSystem
             {
                 case PlayerGesture.GoForward: Move(); break;
                 case PlayerGesture.Stop:      Stop(); break;
-                // All other gestures ignored — only GO and STOP active
+                // Only GO and STOP are active.
             }
         }
 
@@ -102,11 +110,12 @@ namespace GestureThiefSystem
 
         private void CheckEggReached()
         {
-            if (eggObjective == null) return;
+            if (eggObjective == null || _reachedEgg) return;
             if (_currentState == ThiefState.Hidden || _currentState == ThiefState.Alert) return;
             if (Vector3.Distance(transform.position, eggObjective.position) <= reachDistance)
             {
-                Debug.Log("[Thief] Egg reached!");
+                _reachedEgg = true;
+                Debug.Log("[Thief] EGG REACHED — WIN!");
                 _agent.isStopped = true;
                 SetState(ThiefState.Idle);
                 OnEggReached?.Invoke();
