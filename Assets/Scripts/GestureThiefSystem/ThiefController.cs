@@ -110,14 +110,22 @@ namespace GestureThiefSystem
         private void UpdateAnimator(ThiefState state)
         {
             if (_animator == null) return;
-            SafeBool("isMoving",  state == ThiefState.Moving);
-            SafeBool("isHidden",  state == ThiefState.Hidden);
-            SafeBool("isAlert",   state == ThiefState.Alert);
-            SafeBool("isRunning", false);
-            SafeBool("isCrouching", false);
-            // Also drive the legacy ThiefAnimator controller params if present,
-            // so the existing crawl/idle clips still play with movement.
-            SafeBool("IsSpottedOrPausing", state == ThiefState.Hidden || state == ThiefState.Alert);
+            // ThiefAnimator controller params: StartMoving(Trigger), IsSpottedOrPausing(Bool), ReachedEgg(Trigger), WasCaught(Trigger)
+            switch (state)
+            {
+                case ThiefState.Moving:
+                    SafeBool("IsSpottedOrPausing", false);
+                    SafeTrigger("StartMoving");
+                    break;
+                case ThiefState.Hidden:
+                case ThiefState.Alert:
+                case ThiefState.Idle:
+                    SafeBool("IsSpottedOrPausing", true);
+                    break;
+            }
+            // Generic fallbacks if a different controller is used.
+            SafeBool("isMoving", state == ThiefState.Moving);
+            SafeBool("isHidden", state == ThiefState.Hidden);
         }
 
         private void SafeBool(string param, bool value)
@@ -125,6 +133,13 @@ namespace GestureThiefSystem
             foreach (var p in _animator.parameters)
                 if (p.name == param && p.type == AnimatorControllerParameterType.Bool)
                 { _animator.SetBool(param, value); return; }
+        }
+
+        private void SafeTrigger(string param)
+        {
+            foreach (var p in _animator.parameters)
+                if (p.name == param && p.type == AnimatorControllerParameterType.Trigger)
+                { _animator.SetTrigger(param); return; }
         }
 
         private void CheckEggReached()
