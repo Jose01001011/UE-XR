@@ -128,7 +128,9 @@ namespace GestureThiefSystem
         private void Fire(PlayerGesture g)
         {
             Debug.Log("[XRHands] Gesture FIRED: " + g);
-            GestureEventBus.Broadcast(g);
+            // New event bus (OstrichHeist architecture)
+            if (g == PlayerGesture.GoForward) OstrichHeist.GameEvents.RaiseGo();
+            else if (g == PlayerGesture.Stop) OstrichHeist.GameEvents.RaiseStop();
         }
     }
 }
